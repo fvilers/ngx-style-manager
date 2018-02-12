@@ -2,6 +2,23 @@
   "name": "ngx-style-manager",
   "version": "0.0.0",
   "description": "A super simple style manager for Angular applications",
+  "main": "./bundles/ngx-style-manager.umd.js",
+  "module": "./esm5/ngx-style-manager.js",
+  "es2015": "./esm2015/ngx-style-manager.js",
+  "typings": "./ngx-style-manager.d.ts",
+  "scripts": {
+    "clean": "shx rm -rf dist/ && shx rm -rf build/",
+    "build:esm2015": "ngc -p tsconfig-esm2015.json",
+    "build:fesm2015": "rollup -c rollup-esm2015.conf.js",
+    "build:esm5": "ngc -p tsconfig-esm5.json",
+    "build:fesm5": "rollup -c rollup-esm5.conf.js",
+    "build:umd": "rollup -c rollup-umd.conf.js",
+    "build:umd:min": "uglifyjs dist/bundles/ngx-style-manager.umd.js -c -m -o dist/bundles/ngx-style-manager.umd.min.js",
+    "copy:assets": "shx cp -r build/esm2015/*.d.ts build/esm2015/src build/esm2015/*.json package.json README.md dist/ && shx rm dist/src/*.js",
+    "build": "npm run clean && npm run build:esm2015 && npm run build:fesm2015 && npm run build:esm5 && npm run build:fesm5 && npm run build:umd && npm run build:umd:min && npm run copy:assets",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags && npm publish dist"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fvilers/ngx-style-manager.git"
@@ -26,8 +43,11 @@
     "@angular/compiler": "^5.0.0",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/core": "^5.0.0",
+    "rollup": "0.55.5",
     "rxjs": "^5.5.6",
+    "shx": "0.2.2",
     "typescript": "~2.5.3",
+    "uglify-js": "3.3.10",
     "zone.js": "^0.8.18"
   }
 }
