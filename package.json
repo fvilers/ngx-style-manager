@@ -1,6 +1,6 @@
 {
   "name": "ngx-style-manager",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha2",
   "description": "A super simple style manager for Angular applications",
   "main": "./bundles/ngx-style-manager.umd.js",
   "module": "./esm5/ngx-style-manager.js",
